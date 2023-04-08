@@ -170,4 +170,22 @@ class CollectionTest extends TestCase
         $this->assertEquals("Sofa-Yuliansyah-Yuliansyah", $collection->join("-"));
         $this->assertEquals("Sofa-Yuliansyah_Yuliansyah", $collection->join("-", "_"));
     }
+
+    public function testFilter()
+    {
+        $collection = collect([
+            "Sofa" => 100,
+            "Affan" => 90,
+            "Joko" => 80
+        ]);
+
+        $result = $collection->filter(function ($value, $key) {
+            return $value >= 90;
+        });
+
+        $this->assertEquals([
+            "Sofa" => 100,
+            "Affan" => 90
+        ], $result->all());
+    }
 }
